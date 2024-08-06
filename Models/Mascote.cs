@@ -20,6 +20,9 @@ namespace Models
         [JsonPropertyName("abilities")]
         public List<Ability> Abilities { get; set; }
 
+        [JsonPropertyName("nivel")]
+        public int Nivel { get; set; } = 1;
+
         [JsonPropertyName("interactionHistory")]
         public List<string> InteractionHistory { get; set; } = new List<string>();
 
@@ -27,18 +30,27 @@ namespace Models
         {
             Console.WriteLine($"{Name} foi alimentado.");
             InteractionHistory.Add($"{DateTime.Now}: {Name} foi alimentado.");
+            IncrementarNivel();
         }
 
         public void Treinar()
         {
             Console.WriteLine($"{Name} está treinando.");
             InteractionHistory.Add($"{DateTime.Now}: {Name} está treinando.");
+            IncrementarNivel();
         }
 
         public void Dormir()
         {
             Console.WriteLine($"{Name} está dormindo.");
             InteractionHistory.Add($"{DateTime.Now}: {Name} está dormindo.");
+            IncrementarNivel();
+        }
+
+        private void IncrementarNivel()
+        {
+            Nivel++;
+            Console.WriteLine($"{Name} subiu para o nível {Nivel}!");
         }
 
         public void Salvar(string caminhoArquivo)
